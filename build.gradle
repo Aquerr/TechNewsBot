@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'pl.bartlomiejstepien.technewsbot'
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral() // for transitive dependencies
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
+}
+
+dependencies {
+    implementation("net.dv8tion:JDA:4.3.0_277") {
+        exclude module: 'opus-java'
+    }
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}

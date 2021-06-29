@@ -1,0 +1,10 @@
+build/
+.gradle/
+.idea/
+target/
+
+bin/
+
+*.class
+*.jar
+*.zip
