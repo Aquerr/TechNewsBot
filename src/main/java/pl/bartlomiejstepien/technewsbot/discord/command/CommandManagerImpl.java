@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.bartlomiejstepien.technewsbot.watching.NewsWatchManager;
+import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 
 import java.util.Arrays;
 import java.util.HashMap;

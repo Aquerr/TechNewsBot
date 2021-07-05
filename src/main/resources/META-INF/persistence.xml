@@ -7,8 +7,8 @@
     <persistence-unit name="pl.bartlomiejstepien.technewsbot">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>pl.bartlomiejstepien.technewsbot.repository.model.WatchedGithubSite</class>
-        <class>pl.bartlomiejstepien.technewsbot.repository.model.WatchedRssFeed</class>
+        <class>pl.bartlomiejstepien.technewsbot.github.model.WatchedGithubSite</class>
+        <class>pl.bartlomiejstepien.technewsbot.rss.model.WatchedRssFeed</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

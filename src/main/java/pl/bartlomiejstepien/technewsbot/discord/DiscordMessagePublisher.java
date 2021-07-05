@@ -5,8 +5,8 @@ import com.google.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
-import pl.bartlomiejstepien.technewsbot.watching.github.GithubRelease;
-import pl.bartlomiejstepien.technewsbot.watching.rss.RssNews;
+import pl.bartlomiejstepien.technewsbot.github.watching.GithubRelease;
+import pl.bartlomiejstepien.technewsbot.rss.watching.RssNews;
 
 import java.awt.*;
 

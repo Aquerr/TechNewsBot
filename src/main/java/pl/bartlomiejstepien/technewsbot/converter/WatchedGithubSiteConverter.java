@@ -2,7 +2,7 @@ package pl.bartlomiejstepien.technewsbot.converter;
 
 import com.google.inject.Singleton;
 import pl.bartlomiejstepien.technewsbot.dto.WatchedGithubSiteDto;
-import pl.bartlomiejstepien.technewsbot.repository.model.WatchedGithubSite;
+import pl.bartlomiejstepien.technewsbot.github.model.WatchedGithubSite;
 
 @Singleton
 public class WatchedGithubSiteConverter

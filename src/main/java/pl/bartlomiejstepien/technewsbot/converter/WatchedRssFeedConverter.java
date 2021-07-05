@@ -2,7 +2,7 @@ package pl.bartlomiejstepien.technewsbot.converter;
 
 import com.google.inject.Singleton;
 import pl.bartlomiejstepien.technewsbot.dto.WatchedRssFeedDto;
-import pl.bartlomiejstepien.technewsbot.repository.model.WatchedRssFeed;
+import pl.bartlomiejstepien.technewsbot.rss.model.WatchedRssFeed;
 
 @Singleton
 public class WatchedRssFeedConverter

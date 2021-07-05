@@ -4,15 +4,17 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import pl.bartlomiejstepien.technewsbot.watching.NewsWatchManager;
-import pl.bartlomiejstepien.technewsbot.watching.exception.NoWatcherRegisteredForGivenSiteTypeException;
-import pl.bartlomiejstepien.technewsbot.watching.exception.URIAlreadyBeingWatchedException;
+import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
+import pl.bartlomiejstepien.technewsbot.core.WatcherType;
+import pl.bartlomiejstepien.technewsbot.exception.NoWatcherForGivenSiteTypeException;
+import pl.bartlomiejstepien.technewsbot.exception.URIAlreadyBeingWatchedException;
+import pl.bartlomiejstepien.technewsbot.exception.UnrecognizedURLException;
 
 import java.awt.*;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 public class WatchGithubCommand implements Command
@@ -39,21 +41,15 @@ public class WatchGithubCommand implements Command
     @Override
     public void execute(@NotNull Member member, @NotNull TextChannel textChannel, @NotNull List<String> args)
     {
-        String url = args.get(0);
+        String urlString = args.get(0);
         EmbedBuilder embedBuilder = new EmbedBuilder();
 
         try
         {
-            URI uri = new URI(url);
-            watchManager.watch(uri);
-            embedBuilder.setDescription("Watch started on " + uri);
+            URL url = new URL(urlString);
+            watchManager.watch(WatcherType.RSS, url);
+            embedBuilder.setDescription("Watch started on " + url);
             embedBuilder.setColor(Color.CYAN);
-        }
-        catch (URISyntaxException e)
-        {
-            embedBuilder.setColor(Color.RED);
-            embedBuilder.setDescription("Provided URL has wrong format!");
-            e.printStackTrace();
         }
         catch (URIAlreadyBeingWatchedException e)
         {
@@ -61,10 +57,20 @@ public class WatchGithubCommand implements Command
             embedBuilder.setDescription("Given URL is already being watched!");
             e.printStackTrace();
         }
-        catch (NoWatcherRegisteredForGivenSiteTypeException e)
+        catch (NoWatcherForGivenSiteTypeException e)
         {
             embedBuilder.setColor(Color.RED);
             embedBuilder.setDescription("Sorry, there is no watching mechanism for the given site type.");
+            e.printStackTrace();
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        catch (UnrecognizedURLException e)
+        {
+            embedBuilder.setColor(Color.RED);
+            embedBuilder.setDescription("Provided URL has wrong format!");
             e.printStackTrace();
         }
 

@@ -3,8 +3,9 @@ package pl.bartlomiejstepien.technewsbot;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import pl.bartlomiejstepien.technewsbot.discord.command.CommandManager;
-import pl.bartlomiejstepien.technewsbot.service.WatchedGithubSiteService;
-import pl.bartlomiejstepien.technewsbot.watching.NewsWatchManager;
+import pl.bartlomiejstepien.technewsbot.inject.BasicModule;
+import pl.bartlomiejstepien.technewsbot.github.service.WatchedGithubSiteService;
+import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -9,8 +9,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import pl.bartlomiejstepien.technewsbot.discord.DiscordMessagePublisher;
 import pl.bartlomiejstepien.technewsbot.discord.command.CommandManager;
 import pl.bartlomiejstepien.technewsbot.discord.listener.MessageListener;
-import pl.bartlomiejstepien.technewsbot.service.WatchedGithubSiteService;
-import pl.bartlomiejstepien.technewsbot.watching.NewsWatchManager;
+import pl.bartlomiejstepien.technewsbot.github.service.WatchedGithubSiteService;
+import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 
 import javax.security.auth.login.LoginException;
 import java.util.EnumSet;

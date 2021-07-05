@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.jetbrains.annotations.NotNull;
 import pl.bartlomiejstepien.technewsbot.dto.WatchedSiteDto;
-import pl.bartlomiejstepien.technewsbot.watching.NewsWatchManager;
+import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 
 import java.awt.*;
 import java.util.List;
