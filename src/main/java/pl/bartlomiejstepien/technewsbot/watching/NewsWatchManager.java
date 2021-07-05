@@ -1,30 +1,19 @@
 package pl.bartlomiejstepien.technewsbot.watching;
 
-import pl.bartlomiejstepien.technewsbot.TechNewsBot;
+import com.google.inject.ImplementedBy;
+import pl.bartlomiejstepien.technewsbot.dto.WatchedSiteDto;
+import pl.bartlomiejstepien.technewsbot.watching.exception.NoWatcherRegisteredForGivenSiteTypeException;
+import pl.bartlomiejstepien.technewsbot.watching.exception.URIAlreadyBeingWatchedException;
 
-import java.net.http.HttpClient;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
-public class NewsWatchManager
+@ImplementedBy(NewsWatchManagerImpl.class)
+public interface NewsWatchManager
 {
-    private static HttpClient httpClient = HttpClient.newHttpClient();
+    void load();
 
-    private TechNewsBot techNewsBot;
+    void watch(URI uri) throws URIAlreadyBeingWatchedException, NoWatcherRegisteredForGivenSiteTypeException;
 
-    private final Map<NewsWatcher.WatcherType, NewsWatcher> newsWatcherList = new HashMap<>();
-
-    public NewsWatchManager(TechNewsBot techNewsBot)
-    {
-        this.techNewsBot = techNewsBot;
-
-        registerPossibleWatchers();
-    }
-
-    private void registerPossibleWatchers()
-    {
-        this.newsWatcherList.put(NewsWatcher.WatcherType.GITHUB, new GithubProjectWatcher(httpClient));
-    }
+    List<WatchedSiteDto> getWatchedSites();
 }

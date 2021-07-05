@@ -8,8 +8,23 @@ public interface NewsWatcher
 {
     enum WatcherType
     {
-        GITHUB
+        GITHUB("github"),
+        RSS("rss");
+
+        private String name;
+
+        WatcherType(String name)
+        {
+            this.name = name;
+        }
+
+        public String getName()
+        {
+            return name;
+        }
     }
+
+    void startWatching();
 
     WatcherType watcherType();
 
