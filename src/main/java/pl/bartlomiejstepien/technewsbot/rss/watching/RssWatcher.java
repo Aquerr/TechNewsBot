@@ -12,12 +12,12 @@ import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.bartlomiejstepien.technewsbot.TechNewsBot;
+import pl.bartlomiejstepien.technewsbot.core.NewsWatcher;
 import pl.bartlomiejstepien.technewsbot.core.WatcherType;
 import pl.bartlomiejstepien.technewsbot.dto.WatchedRssFeedDto;
-import pl.bartlomiejstepien.technewsbot.core.NewsWatcher;
+import pl.bartlomiejstepien.technewsbot.exception.URIAlreadyBeingWatchedException;
 import pl.bartlomiejstepien.technewsbot.exception.UnrecognizedURLException;
 import pl.bartlomiejstepien.technewsbot.rss.service.WatchedRssFeedService;
-import pl.bartlomiejstepien.technewsbot.exception.URIAlreadyBeingWatchedException;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -98,8 +98,23 @@ public class RssWatcher implements NewsWatcher
         if (!isValidUri(url))
             throw new UnrecognizedURLException();
 
+        watchURL(url);
+    }
+
+    @Override
+    public void unwatch(String url)
+    {
+        this.watchTasks.stream().filter(projectWatchTask -> projectWatchTask.getUrl().toString().equals(url))
+                .findFirst()
+                .ifPresent(this.watchTasks::remove);
+        this.watchedRssFeedService.delete(url);
+    }
+
+    private void watchURL(URL url)
+    {
         RssWatcher.RssFeedWatchTask projectWatchTask = new RssWatcher.RssFeedWatchTask(watchedRssFeedService, url);
         this.watchTasks.add(projectWatchTask);
+
         WatchedRssFeedDto watchedRssFeedDto = new WatchedRssFeedDto();
         watchedRssFeedDto.setUrl(url.toString());
         watchedRssFeedDto.setReleaseDateTime(LocalDateTime.of(1900, 1, 1, 1, 1, 1));
@@ -168,11 +183,11 @@ public class RssWatcher implements NewsWatcher
 
                 if (watchedRssFeedDto == null)
                 {
-                    showReleaseNotesAndSave(0, new RssNews(syndFeed.getTitle(), newsTitle, description, latestPublishedDateTime, url));
+                    showNewsAndSave(0, new RssNews(syndFeed.getTitle(), newsTitle, description, latestPublishedDateTime, url));
                 }
                 else if (latestPublishedDateTime.isAfter(watchedRssFeedDto.getReleaseDateTime()))
                 {
-                    showReleaseNotesAndSave(watchedRssFeedDto.getId(), new RssNews(syndFeed.getTitle(), newsTitle, description, latestPublishedDateTime, url));
+                    showNewsAndSave(watchedRssFeedDto.getId(), new RssNews(syndFeed.getTitle(), newsTitle, description, latestPublishedDateTime, url));
                 }
             }
             catch (FeedException | IOException e)
@@ -181,7 +196,7 @@ public class RssWatcher implements NewsWatcher
             }
         }
 
-        private void showReleaseNotesAndSave(long id, RssNews rssNews)
+        private void showNewsAndSave(long id, RssNews rssNews)
         {
             LOGGER.debug(rssNews.toString());
             WatchedRssFeedDto watchedRssFeedDto = new WatchedRssFeedDto();

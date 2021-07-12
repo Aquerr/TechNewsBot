@@ -9,7 +9,7 @@ import java.util.List;
 @ImplementedBy(WatchedGithubSiteRepositoryImpl.class)
 public interface WatchedGithubSiteService
 {
-    WatchedGithubSiteDto find(final Integer id);
+    WatchedGithubSiteDto find(final Long id);
 
     WatchedGithubSiteDto find(final String url);
 
@@ -18,4 +18,6 @@ public interface WatchedGithubSiteService
     void saveOrUpdate(final WatchedGithubSiteDto watchedNews);
 
     void delete(final WatchedGithubSiteDto watchedNews);
+
+    void delete(final String url);
 }

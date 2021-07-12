@@ -17,4 +17,6 @@ public interface WatchedRssFeedService
     void saveOrUpdate(final WatchedRssFeedDto watchedNews);
 
     void delete(final WatchedRssFeedDto watchedNews);
+
+    void delete(final String url);
 }

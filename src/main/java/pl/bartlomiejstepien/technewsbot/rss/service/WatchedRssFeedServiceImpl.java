@@ -62,4 +62,11 @@ public class WatchedRssFeedServiceImpl implements WatchedRssFeedService
                 .map(this.watchedRssFeedConverter::convertToEntity)
                 .ifPresent(this.watchedRssFeedRepository::delete);
     }
+
+    @Override
+    public void delete(String url)
+    {
+        Optional.ofNullable(url)
+                .ifPresent(watchedRssFeedRepository::delete);
+    }
 }

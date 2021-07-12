@@ -12,8 +12,6 @@ import pl.bartlomiejstepien.technewsbot.exception.UnrecognizedURLException;
 
 import java.awt.*;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class WatchGithubCommand implements Command
     @Override
     public String getUsage()
     {
-        return "watch_github <url>";
+        return "watch_github <repo_url>";
     }
 
     @Override
@@ -47,7 +45,7 @@ public class WatchGithubCommand implements Command
         try
         {
             URL url = new URL(urlString);
-            watchManager.watch(WatcherType.RSS, url);
+            watchManager.watch(WatcherType.GITHUB, url);
             embedBuilder.setDescription("Watch started on " + url);
             embedBuilder.setColor(Color.CYAN);
         }

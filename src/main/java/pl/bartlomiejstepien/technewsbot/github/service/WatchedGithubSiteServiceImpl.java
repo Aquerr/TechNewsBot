@@ -24,7 +24,7 @@ public class WatchedGithubSiteServiceImpl implements WatchedGithubSiteService
     }
 
     @Override
-    public WatchedGithubSiteDto find(Integer id)
+    public WatchedGithubSiteDto find(Long id)
     {
         return Optional.ofNullable(this.watchedGithubSiteRepository.find(id))
                 .map(this.watchedGithubSiteConverter::convertToDto)
@@ -61,5 +61,12 @@ public class WatchedGithubSiteServiceImpl implements WatchedGithubSiteService
         Optional.ofNullable(watchedNews)
                 .map(this.watchedGithubSiteConverter::convertToEntity)
                 .ifPresent(this.watchedGithubSiteRepository::delete);
+    }
+
+    @Override
+    public void delete(String url)
+    {
+        Optional.ofNullable(url)
+                .ifPresent(watchedGithubSiteRepository::delete);
     }
 }

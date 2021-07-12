@@ -18,4 +18,6 @@ public interface NewsWatchManager
             NoWatcherForGivenSiteTypeException, UnrecognizedURLException;
 
     List<WatchedSiteDto> getWatchedSites();
+
+    void unwatch(String urlString);
 }

@@ -40,8 +40,9 @@ public class CommandManagerImpl implements CommandManager
     {
         this.commands.put("help", new HelpCommand(this));
         this.commands.put("watch_github", new WatchGithubCommand(this.newsWatchManager));
-        this.commands.put("show_watchings", new ShowWatchingsCommand(this.newsWatchManager));
+        this.commands.put("list", new ShowWatchingsCommand(this.newsWatchManager));
         this.commands.put("watch_rss", new WatchRssCommand(this.newsWatchManager));
+        this.commands.put("unwatch", new UnwatchCommand(this.newsWatchManager));
     }
 
     @Override

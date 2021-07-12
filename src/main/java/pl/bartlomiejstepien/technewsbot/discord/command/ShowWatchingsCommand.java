@@ -22,7 +22,7 @@ public class ShowWatchingsCommand implements Command
     @Override
     public String getUsage()
     {
-        return "show_watchings";
+        return "list";
     }
 
     @Override

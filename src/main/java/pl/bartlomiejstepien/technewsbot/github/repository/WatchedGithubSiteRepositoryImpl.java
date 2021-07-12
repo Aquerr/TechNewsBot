@@ -7,12 +7,13 @@ import pl.bartlomiejstepien.technewsbot.util.EntityManagerProvider;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Singleton
 public class WatchedGithubSiteRepositoryImpl implements WatchedGithubSiteRepository
 {
     @Override
-    public WatchedGithubSite find(Integer id)
+    public WatchedGithubSite find(Long id)
     {
         EntityManager entityManager = getEntityManager();
         Session session = entityManager.unwrap(Session.class);
@@ -64,9 +65,29 @@ public class WatchedGithubSiteRepositoryImpl implements WatchedGithubSiteReposit
     public void delete(WatchedGithubSite watchedNews)
     {
         EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
         final WatchedGithubSite watchedGithubSite = entityManager.find(WatchedGithubSite.class, watchedNews.getId());
         entityManager.remove(watchedGithubSite);
+        entityManager.getTransaction().commit();
         entityManager.close();
+    }
+
+    @Override
+    public void delete(String url)
+    {
+        Optional.ofNullable(url)
+                .ifPresent(url1 -> {
+                    EntityManager entityManager = getEntityManager();
+                    entityManager.getTransaction().begin();
+                    entityManager.createNamedQuery("GITHUB_SITE.FIND_BY_URL", WatchedGithubSite.class)
+                            .setParameter("url", url1)
+                            .getResultList()
+                            .stream()
+                            .findFirst()
+                            .ifPresent(entityManager::remove);
+                    entityManager.getTransaction().commit();
+                    entityManager.close();
+                });
     }
 
     private static EntityManager getEntityManager()

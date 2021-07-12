@@ -8,17 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "watched_github_site")
-@NamedQueries({
-    @NamedQuery(name = "GITHUB_SITE.FIND_ALL", query = "SELECT site FROM WatchedGithubSite site"),
-    @NamedQuery(name = "GITHUB_SITE.FIND_BY_URL", query = "SELECT site FROM WatchedGithubSite site WHERE site.url = :url")
-})
+@NamedQuery(name = "GITHUB_SITE.FIND_ALL", query = "SELECT site FROM WatchedGithubSite site")
+@NamedQuery(name = "GITHUB_SITE.FIND_BY_URL", query = "SELECT site FROM WatchedGithubSite site WHERE site.url = :url")
 @Getter
 @Setter
 public class WatchedGithubSite

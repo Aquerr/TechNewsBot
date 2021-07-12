@@ -2,14 +2,13 @@ package pl.bartlomiejstepien.technewsbot.github.repository;
 
 import com.google.inject.ImplementedBy;
 import pl.bartlomiejstepien.technewsbot.github.model.WatchedGithubSite;
-import pl.bartlomiejstepien.technewsbot.github.service.WatchedGithubSiteServiceImpl;
 
 import java.util.List;
 
-@ImplementedBy(WatchedGithubSiteServiceImpl.class)
+@ImplementedBy(WatchedGithubSiteRepositoryImpl.class)
 public interface WatchedGithubSiteRepository
 {
-    WatchedGithubSite find(final Integer id);
+    WatchedGithubSite find(final Long id);
 
     WatchedGithubSite find(final String url);
 
@@ -18,4 +17,6 @@ public interface WatchedGithubSiteRepository
     void saveOrUpdate(final WatchedGithubSite watchedNews);
 
     void delete(final WatchedGithubSite watchedNews);
+
+    void delete(final String url);
 }

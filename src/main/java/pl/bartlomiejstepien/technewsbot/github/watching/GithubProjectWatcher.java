@@ -76,6 +76,15 @@ public class GithubProjectWatcher implements NewsWatcher
         this.watchedGithubSiteService.saveOrUpdate(watchedGithubSiteDto);
     }
 
+    @Override
+    public void unwatch(String url)
+    {
+        this.watchTasks.stream().filter(projectWatchTask -> projectWatchTask.getUri().toString().equals(url))
+                .findFirst()
+                .ifPresent(this.watchTasks::remove);
+        this.watchedGithubSiteService.delete(url);
+    }
+
     private void preformScan()
     {
         try

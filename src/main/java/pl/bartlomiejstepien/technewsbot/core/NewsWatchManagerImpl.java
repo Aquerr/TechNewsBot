@@ -63,4 +63,10 @@ public class NewsWatchManagerImpl implements NewsWatchManager
         watchedSiteDtos.addAll(new LinkedList<>(this.watchedRssFeedService.findAll()));
         return watchedSiteDtos;
     }
+
+    @Override
+    public void unwatch(String urlString)
+    {
+        this.newsWatcherMap.forEach((type, watcher) -> watcher.unwatch(urlString));
+    }
 }

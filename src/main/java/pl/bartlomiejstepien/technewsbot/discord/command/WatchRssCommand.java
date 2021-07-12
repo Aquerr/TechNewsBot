@@ -27,7 +27,7 @@ public class WatchRssCommand implements Command
     @Override
     public String getUsage()
     {
-        return "watch_rss <url>";
+        return "watch_rss <rss_url>";
     }
 
     @Override
@@ -73,7 +73,9 @@ public class WatchRssCommand implements Command
             embedBuilder.setDescription("Provided URL has wrong format!");
             e.printStackTrace();
         }
-
-        textChannel.sendMessage(embedBuilder.build()).complete();
+        finally
+        {
+            textChannel.sendMessage(embedBuilder.build()).complete();
+        }
     }
 }

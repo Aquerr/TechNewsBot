@@ -12,4 +12,6 @@ public interface NewsWatcher
     WatcherType watcherType();
 
     void watch(URL url) throws URIAlreadyBeingWatchedException, UnrecognizedURLException;
+
+    void unwatch(String url);
 }

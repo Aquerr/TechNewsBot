@@ -12,18 +12,18 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-            <property name="javax.persistence.jdbc.url"    value="jdbc:h2:~/technewsbot_entitysource" />
+            <property name="javax.persistence.jdbc.url"    value="jdbc:h2:~/technewsbot" />
             <property name="javax.persistence.jdbc.user" value="technewsbot" />
             <property name="javax.persistence.jdbc.password" value="technewsbot" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
             <property name="default_schema" value="technewsbot"/>
             <property name="connection.autocommit" value="true"/>
-<!--            <property name="javax.persistence.schema-generation.database.action" value="create" />-->
         </properties>
 
     </persistence-unit>

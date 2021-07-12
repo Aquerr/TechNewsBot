@@ -8,17 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "watched_rss_feed")
-@NamedQueries({
-        @NamedQuery(name = "RSS_FEED.FIND_ALL", query = "SELECT feed FROM WatchedRssFeed feed"),
-        @NamedQuery(name = "RSS_FEED.FIND_BY_URL", query = "SELECT feed FROM WatchedRssFeed feed WHERE feed.url = :url")
-})
+@NamedQuery(name = "RSS_FEED.FIND_ALL", query = "SELECT feed FROM WatchedRssFeed feed")
+@NamedQuery(name = "RSS_FEED.FIND_BY_URL", query = "SELECT feed FROM WatchedRssFeed feed WHERE feed.url = :url")
 @Getter
 @Setter
 public class WatchedRssFeed
