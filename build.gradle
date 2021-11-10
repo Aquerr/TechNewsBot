@@ -1,5 +1,7 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'java'
+    id 'application'
 }
 
 group 'pl.bartlomiejstepien.technewsbot'
@@ -11,6 +13,10 @@ repositories {
         name 'm2-dv8tion'
         url 'https://m2.dv8tion.net/releases'
     }
+}
+
+shadowJar {
+    mainClassName = "pl.bartlomiejstepien.technewsbot.TechNewsBotBootstrap"
 }
 
 dependencies {

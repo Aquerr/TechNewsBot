@@ -1,7 +1,6 @@
 package pl.bartlomiejstepien.technewsbot.discord.listener;
 
 import com.google.inject.Inject;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -18,13 +17,11 @@ public class MessageListener extends ListenerAdapter
 
     private final CommandManager commandManager;
     private final long newsChannelId;
-    private final long botId;
 
     @Inject
-    public MessageListener(CommandManager commandManager, final long botId, final long newsChannelId)
+    public MessageListener(CommandManager commandManager, final long newsChannelId)
     {
         this.commandManager = commandManager;
-        this.botId = botId;
         this.newsChannelId = newsChannelId;
     }
 
@@ -37,7 +34,7 @@ public class MessageListener extends ListenerAdapter
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event)
     {
-        if (isAuthorTechBot(event.getAuthor()))
+        if (isAuthorTechBot(event))
             return;
 
         if (event.getChannel().getIdLong() == this.newsChannelId && event.getMessage().getContentRaw().startsWith(COMMAND_PREFIX))
@@ -46,8 +43,8 @@ public class MessageListener extends ListenerAdapter
         }
     }
 
-    private boolean isAuthorTechBot(User user)
+    private boolean isAuthorTechBot(GuildMessageReceivedEvent event)
     {
-        return user.getIdLong() == this.botId;
+        return event.getAuthor().getIdLong() == event.getJDA().getSelfUser().getIdLong();
     }
 }

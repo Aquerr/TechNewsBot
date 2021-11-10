@@ -8,3 +8,5 @@ bin/
 *.class
 *.jar
 *.zip
+
+techbot.properties

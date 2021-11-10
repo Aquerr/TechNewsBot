@@ -4,8 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import pl.bartlomiejstepien.technewsbot.config.Configuration;
 import pl.bartlomiejstepien.technewsbot.discord.DiscordMessagePublisher;
 import pl.bartlomiejstepien.technewsbot.discord.command.CommandManager;
 import pl.bartlomiejstepien.technewsbot.discord.listener.MessageListener;
@@ -14,7 +16,6 @@ import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 
 import javax.security.auth.login.LoginException;
 import java.util.EnumSet;
-import java.util.Properties;
 
 @Singleton
 public class TechNewsBot
@@ -27,8 +28,7 @@ public class TechNewsBot
     }
 
     private JDA jda;
-    private Properties properties;
-    private String botToken;
+    private Configuration configuration;
 
     private CommandManager commandManager;
 
@@ -38,10 +38,10 @@ public class TechNewsBot
     private DiscordMessagePublisher discordMessagePublisher;
 
     @Inject
-    public TechNewsBot(Properties properties, CommandManager commandManager, NewsWatchManager newsWatchManager, WatchedGithubSiteService watchedGithubSiteService)
+    public TechNewsBot(Configuration configuration, CommandManager commandManager, NewsWatchManager newsWatchManager, WatchedGithubSiteService watchedGithubSiteService)
     {
         INSTANCE = this;
-        this.properties = properties;
+        this.configuration = configuration;
         this.commandManager = commandManager;
         this.watchedGithubSiteService = watchedGithubSiteService;
         this.newsWatchManager = newsWatchManager;
@@ -51,13 +51,14 @@ public class TechNewsBot
     {
         try
         {
-            this.jda = JDABuilder.createLight(this.properties.getProperty("BOT_TOKEN"), EnumSet.of(GatewayIntent.GUILD_MESSAGES)) // slash commands don't need any intents
-                    .addEventListeners(new MessageListener(this.commandManager, getBotId(), getChannelId()))
+            this.jda = JDABuilder.createLight(this.configuration.getBotToken(), EnumSet.of(GatewayIntent.GUILD_MESSAGES)) // slash commands don't need any intents
+                    .setActivity(Activity.playing("Techbot tech!help https://github.com/Aquerr/TechNewsBot"))
+                    .addEventListeners(new MessageListener(this.commandManager, getChannelId()))
                     .build().awaitReady();
         }
         catch (LoginException | InterruptedException e)
         {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
         }
 
         TextChannel textChannel = this.jda.getTextChannelById(getChannelId());
@@ -71,14 +72,9 @@ public class TechNewsBot
         return jda;
     }
 
-    public long getBotId()
-    {
-        return Long.parseLong(this.properties.getProperty("BOT_ID"));
-    }
-
     public Long getChannelId()
     {
-        return Long.parseLong(this.properties.getProperty("NEWS_CHANNEL_ID"));
+        return Long.parseLong(this.configuration.getNewsChannelId());
     }
 
     public DiscordMessagePublisher getDiscordPublisher()
