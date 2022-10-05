@@ -19,8 +19,8 @@ public class BasicModule extends AbstractModule
 {
     @Override
     protected void configure() {
-        bindConstant().annotatedWith(Names.named("bot-id")).to(System.getProperty("BOT_ID"));
-        bindConstant().annotatedWith(Names.named("news-channel-id")).to(System.getProperty("NEWS_CHANNEL_ID"));
+        bindConstant().annotatedWith(Names.named("bot-id")).to(System.getProperty("BOT_ID", ""));
+        bindConstant().annotatedWith(Names.named("news-channel-id")).to(System.getProperty("NEWS_CHANNEL_ID", ""));
 
         bind(WatchedGithubSiteConverter.class).asEagerSingleton();
         bind(WatchedRssFeedConverter.class).asEagerSingleton();
