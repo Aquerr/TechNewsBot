@@ -4,7 +4,7 @@ import com.google.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 import java.awt.*;
 import java.util.List;
@@ -40,7 +40,7 @@ public class HelpCommand implements Command
             embedBuilder.addField(new MessageEmbed.Field(COMMAND_PREFIX + commandEntry.getValue().getUsage(), commandEntry.getValue().getDescription(), false));
         }
 
-        textChannel.sendMessage(embedBuilder.build()).queue();
+        textChannel.sendMessageEmbeds(embedBuilder.build()).queue();
     }
 
     @Override

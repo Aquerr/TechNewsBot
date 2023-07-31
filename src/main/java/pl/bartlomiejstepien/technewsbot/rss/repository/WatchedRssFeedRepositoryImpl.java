@@ -1,11 +1,11 @@
 package pl.bartlomiejstepien.technewsbot.rss.repository;
 
 import com.google.inject.Singleton;
+import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import pl.bartlomiejstepien.technewsbot.rss.model.WatchedRssFeed;
 import pl.bartlomiejstepien.technewsbot.util.EntityManagerProvider;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 

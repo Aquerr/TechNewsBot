@@ -2,7 +2,7 @@ package pl.bartlomiejstepien.technewsbot.discord.command;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.jetbrains.annotations.NotNull;
 import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 import pl.bartlomiejstepien.technewsbot.core.WatcherType;
@@ -72,6 +72,6 @@ public class WatchGithubCommand implements Command
             e.printStackTrace();
         }
 
-        textChannel.sendMessage(embedBuilder.build()).complete();
+        textChannel.sendMessageEmbeds(embedBuilder.build()).complete();
     }
 }

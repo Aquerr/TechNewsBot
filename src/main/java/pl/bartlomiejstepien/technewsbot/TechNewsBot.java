@@ -5,16 +5,15 @@ import com.google.inject.Singleton;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import pl.bartlomiejstepien.technewsbot.config.Configuration;
+import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 import pl.bartlomiejstepien.technewsbot.discord.DiscordMessagePublisher;
 import pl.bartlomiejstepien.technewsbot.discord.command.CommandManager;
 import pl.bartlomiejstepien.technewsbot.discord.listener.MessageListener;
 import pl.bartlomiejstepien.technewsbot.github.service.WatchedGithubSiteService;
-import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
 
-import javax.security.auth.login.LoginException;
 import java.util.EnumSet;
 
 @Singleton
@@ -56,7 +55,7 @@ public class TechNewsBot
                     .addEventListeners(new MessageListener(this.commandManager, getChannelId()))
                     .build().awaitReady();
         }
-        catch (LoginException | InterruptedException e)
+        catch (InterruptedException e)
         {
             throw new IllegalStateException(e);
         }

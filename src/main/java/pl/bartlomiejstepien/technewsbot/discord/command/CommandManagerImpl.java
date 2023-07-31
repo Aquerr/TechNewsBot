@@ -3,7 +3,7 @@ package pl.bartlomiejstepien.technewsbot.discord.command;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;

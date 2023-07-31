@@ -2,7 +2,7 @@ package pl.bartlomiejstepien.technewsbot.discord.command;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.jetbrains.annotations.NotNull;
 import pl.bartlomiejstepien.technewsbot.dto.WatchedSiteDto;
 import pl.bartlomiejstepien.technewsbot.core.NewsWatchManager;
@@ -47,6 +47,6 @@ public class ShowWatchingsCommand implements Command
         }
         embedBuilder.setDescription(descriptionBuilder.toString());
 
-        textChannel.sendMessage(embedBuilder.build()).queue();
+        textChannel.sendMessageEmbeds(embedBuilder.build()).queue();
     }
 }

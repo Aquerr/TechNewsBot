@@ -9,6 +9,7 @@ import com.rometools.rome.io.XmlReader;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.bartlomiejstepien.technewsbot.TechNewsBot;
@@ -177,6 +178,9 @@ public class RssWatcher implements NewsWatcher
                             .map(SyndContent::getValue)
                             .orElse("");
                 }
+
+                // Strip HTML Tags
+                description = Jsoup.parse(description).text();
 
                 String url = syndEntry.getLink();
                 String newsTitle = syndEntry.getTitle();

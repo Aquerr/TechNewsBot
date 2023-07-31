@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import pl.bartlomiejstepien.technewsbot.github.watching.GithubRelease;
 import pl.bartlomiejstepien.technewsbot.rss.watching.RssNews;
 
@@ -42,7 +42,7 @@ public class DiscordMessagePublisher
         embedBuilder.setDescription(releaseNote);
         embedBuilder.setFooter(releaseNotesFooter);
 
-        this.newsChannel.sendMessage(embedBuilder.build()).complete();
+        this.newsChannel.sendMessageEmbeds(embedBuilder.build()).complete();
     }
 
     public void publishReleaseNotes(RssNews rssNews)
@@ -66,6 +66,6 @@ public class DiscordMessagePublisher
         embedBuilder.setDescription(releaseNote);
         embedBuilder.setFooter(releaseNotesFooter);
 
-        this.newsChannel.sendMessage(embedBuilder.build()).complete();
+        this.newsChannel.sendMessageEmbeds(embedBuilder.build()).complete();
     }
 }
