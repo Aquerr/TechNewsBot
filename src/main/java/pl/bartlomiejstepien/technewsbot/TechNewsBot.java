@@ -50,7 +50,8 @@ public class TechNewsBot
     {
         try
         {
-            this.jda = JDABuilder.createLight(this.configuration.getBotToken(), EnumSet.of(GatewayIntent.GUILD_MESSAGES)) // slash commands don't need any intents
+            this.jda = JDABuilder.createLight(this.configuration.getBotToken(),
+                            EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)) // slash commands don't need any intents
                     .setActivity(Activity.playing("Techbot tech!help https://github.com/Aquerr/TechNewsBot"))
                     .addEventListeners(new MessageListener(this.commandManager, getChannelId()))
                     .build().awaitReady();

@@ -16,6 +16,12 @@ repositories {
     }
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.getMajorVersion()))
+    }
+}
+
 shadowJar {
     mainClassName = "pl.bartlomiejstepien.technewsbot.TechNewsBotBootstrap"
 }
