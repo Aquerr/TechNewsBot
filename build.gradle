@@ -2,7 +2,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'java'
     id 'application'
-    id "io.freefair.lombok" version "8.1.0"
+    id "io.freefair.lombok" version "8.11"
 }
 
 group 'pl.bartlomiejstepien.technewsbot'
@@ -10,15 +10,11 @@ version '1.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral() // for transitive dependencies
-    maven {
-        name 'm2-dv8tion'
-        url 'https://m2.dv8tion.net/releases'
-    }
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.getMajorVersion()))
+        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.getMajorVersion()))
     }
 }
 
@@ -27,22 +23,22 @@ shadowJar {
 }
 
 dependencies {
-    implementation("net.dv8tion:JDA:5.0.0-beta.12") {
+    implementation("net.dv8tion:JDA:5.2.1") {
         exclude module: 'opus-java'
     }
-    implementation 'com.h2database:h2:2.2.220'
-    implementation 'org.hibernate:hibernate-core:6.2.7.Final'
+    implementation 'com.h2database:h2:2.3.232'
+    implementation 'org.hibernate:hibernate-core:6.6.2.Final'
     implementation 'com.google.inject:guice:7.0.0'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'org.slf4j:slf4j-simple:2.0.7'
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'org.slf4j:slf4j-simple:2.0.16'
     implementation 'com.rometools:rome:2.1.0'
-    implementation 'org.jsoup:jsoup:1.16.1'
+    implementation 'org.jsoup:jsoup:1.18.1'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testImplementation 'org.mockito:mockito-core:5.4.0'
-    testImplementation 'org.mockito:mockito-junit-jupiter:5.4.0'
-    testImplementation 'org.assertj:assertj-core:3.24.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
+    testImplementation 'org.mockito:mockito-core:5.14.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.14.2'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
 }
 
 test {
